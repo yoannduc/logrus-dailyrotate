@@ -5,6 +5,16 @@ import (
 	"github.com/yoannduc/dailyrotate"
 )
 
+const (
+	DefaultLogPath  = dailyrotate.DefaultFilePath
+	DefaultMaxAge   = dailyrotate.DefaultMaxAge
+	DefaultMinLevel = logrus.InfoLevel
+)
+
+// &logrus.TextFormatter{} is not a constant,
+// therefore it can't be declared in const block
+var DefaultFormatter = &logrus.TextFormatter{}
+
 type Hook struct {
 	rotateWriter *dailyrotate.RotateWriter
 	formatter    logrus.Formatter
@@ -30,16 +40,7 @@ func New(
 }
 
 func NewWithDefaults() (*Hook, error) {
-	rw, err := dailyrotate.NewWithDefaults()
-	if err != nil {
-		return nil, err
-	}
-
-	return &Hook{
-		rotateWriter: rw,
-		formatter:    &logrus.TextFormatter{},
-		minLevel:     logrus.InfoLevel,
-	}, nil
+	return New(DefaultLogPath, DefaultMaxAge, DefaultFormatter, DefaultMinLevel)
 }
 
 func (h *Hook) Fire(e *logrus.Entry) error {
