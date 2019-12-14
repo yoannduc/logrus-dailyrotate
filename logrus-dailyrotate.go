@@ -1,3 +1,34 @@
+// Copyright 2019 Yoann Duc. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be found
+// in the LICENSE file.
+
+// Package logrusdailyrotate is a daily rotating log file hook for logrus.
+//
+// Makes use of github.com/yoannduc/dailyrotate
+// (documentation: https://godoc.org/github.com/yoannduc/dailyrotate)
+//
+// A trivial example is:
+//
+//  package main
+//
+//  import (
+//      "github.com/sirupsen/logrus"
+//      logrusdailyrotate "github.com/yoannduc/logrus-dailyrotate"
+//  )
+//
+//  func main() {
+//      log := logrus.New()
+//
+//      hook, err := logrusdailyrotate.New("", 5, logrus.InfoLevel, &logrus.TextFormatter{})
+//      if err != nil {
+//          // Handle error your way
+//      }
+//
+//      log.Hooks.Add(hook)
+//
+//      log.Info("Ready to go ! :)")
+//  }
+//
 package logrusdailyrotate
 
 import (
